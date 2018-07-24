@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+
+use esmith::Build::CreateLinks qw(:all);
+
+#--------------------------------------------------
+## example of what is a createlinks
+##--------------------------------------------------
+
+
+#mandatory to create db after installation
+my $event = 'nethserver-xerte-update';
+event_actions ( $event, 'initialize-default-databases' => '00');
+
+#event_actions($event, qw(
+#             nethserver-virtualhosts-create 20
+#             nethserver-virtualhosts-setbasicpassword 30
+#             nethserver-virtualhosts-ftp-save 60
+#));
+
+#expand templates following one event
+#event_templates($event, qw(
+#                /etc/httpd/conf.d/virtualhosts.conf
+#                /etc/Other/Path
+#));
+
+#restart services following one event
+event_services($event, qw(
+               httpd reload
+));
+
+
+
